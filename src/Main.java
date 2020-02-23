@@ -15,13 +15,36 @@ public class Main {
         stG1.removeItem();
 
         */
-        System.out.println(st1.sort());
+        System.out.println(sortStack(st1));
     }
 
-    /*
-    public static int[] sortStack(){
 
-    }*/
+    public static String sortStack(Stack obj) throws Exception{
+        if(obj == null || obj.isEmpty())
+            throw new Exception("Invalid Object");
+        else {
+            Stack stackClone = (Stack) obj.clone();
+            Stack aux = new Stack(stackClone.stackVetSize());
+            int value;
+            while(!stackClone.isEmpty()) {
+                value = stackClone.remove();
+                if(aux.isEmpty())
+                    aux.push(value);
+                else {
+                    if(aux.getLast() > value){
+                        while(aux.isEmpty() != true && aux.getLast() > value){
+                            stackClone.push(aux.remove());
+                        }
+                        aux.push(value);
+                    }else{
+                        aux.push(value);
+                    }
+
+                }
+            }
+            return aux.toString();
+        }
+    }
     public static int getSmaller(Stack obj) throws Exception{
         int value = 0;
 
